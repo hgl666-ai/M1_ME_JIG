@@ -5,7 +5,7 @@
   * @brief          : M1 测试治具 —— U2（主控2）主程序
   *
   * 功能：
-  *   1) PC 协议（USART1 PB6/PB7，460800 8N1，A5 5B 帧）
+  *   1) PC 协议（USART1 PB6/PB7，115200 8N1，A5 5B 帧）
   *   2) 8 路测试点 ADC 采集（含 VDDA 校准）—— 与 U1 同一组网络，可做交叉校验
   *   3) 对射传感器检测（ADC4/ADC5）
   *   4) TMC2209：EN=PA0 / DIR=PB8 / STEP=PB9 / 单线 UART=PA9(TX)、PA10(RX)
@@ -96,7 +96,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   BSP_ADC_Init();      /* ADC 自校准 + VDDA 反算 */
-  BSP_UART_Init();     /* 460800 + DMA 接收 */
+  BSP_UART_Init();     /* PC_UART_BAUD + DMA 接收 */
 
   /* TMC2209：先探测（扫地址 + 必要时交换 TX/RX 引脚），再写配置并读回校验。
    * 探测失败不阻塞启动 —— 上位机可用 0x0020 查询到 alive=0。 */

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    bsp_uart.c
-  * @brief   USART1（PB6/PB7）460800 8N1 + DMA 循环接收
+  * @brief   USART1（PB6/PB7）PC_UART_BAUD 8N1 + DMA 循环接收
   *
   * CubeMX 工程里没有配置 DMA（U1.ioc / U2.ioc 均无 DMA 通道），
   * 因此这里手工建立 DMA1_Channel5 → USART1_RX 的链接；
@@ -64,13 +64,13 @@ void DMA1_Channel5_IRQHandler(void)
  *============================================================================*/
 
 /**
-  * @brief  初始化：切 460800 → 建 DMA → 启动循环接收
+  * @brief  初始化：按 PC_UART_BAUD 重配 → 建 DMA → 启动循环接收
   * @note   在 MX_USART1_UART_Init() 之后调用
   */
 void BSP_UART_Init(void)
 {
-    /* 波特率以协议表为准；CubeMX 生成值（115200）会被这里覆盖，
-     * 目的是让“重新生成工程”不会破坏 460800。 */
+    /* 波特率统一由 PC_UART_BAUD 决定；CubeMX 生成值会被这里覆盖，
+     * 目的是让“重新生成工程”不会破坏波特率设置。 */
     huart1.Init.BaudRate = PC_UART_BAUD;
     if (HAL_UART_Init(&huart1) != HAL_OK) {
         Error_Handler();

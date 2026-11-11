@@ -1,0 +1,2 @@
+﻿== M1 U2 自测 ==  COM4 @ 460800 8N1
+打不开串口：could not open port 'COM4': PermissionError(13, '拒绝访问。', None, 5)

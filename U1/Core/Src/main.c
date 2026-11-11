@@ -5,7 +5,7 @@
   * @brief          : M1 测试治具 —— U1（主控1）主程序
   *
   * 功能：
-  *   1) PC 协议（USART1 PB6/PB7，460800 8N1，A5 5B 帧）
+  *   1) PC 协议（USART1 PB6/PB7，115200 8N1，A5 5B 帧）
   *   2) 8 路测试点 ADC 采集（含 VDDA 校准）
   *   3) 对射传感器检测（ADC4/ADC5 + 阈值/回差/去抖）
   *
@@ -93,7 +93,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   BSP_ADC_Init();      /* ADC 自校准 + VDDA 反算 */
-  BSP_UART_Init();     /* 460800 + DMA 接收 */
+  BSP_UART_Init();     /* PC_UART_BAUD + DMA 接收 */
   APP_Init();          /* 对射初始化 + 首轮快照 */
   PROTO_Init();
   /* USER CODE END 2 */
@@ -114,7 +114,7 @@ int main(void)
 /**
   * @brief System Clock Configuration
   * @note  HSE 8MHz × PLL8 = 64MHz；HSE 起振失败时退回 HSI/2×16 = 64MHz。
-  *        用 HSE 是因为 460800 波特率对时钟精度敏感（HSI 只有 ±1%）。
+  *        用 HSE 是为了串口时钟精度（HSI 只有 ±1%），长时间/高速通信更稳。
   * @retval None
   */
 void SystemClock_Config(void)

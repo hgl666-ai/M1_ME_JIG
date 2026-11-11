@@ -28,7 +28,7 @@
 #define FW_VER_PATCH   0u
 
 /*===== PC 链路 =====*/
-#define PC_UART_BAUD   460800u    /* 协议表规定 460800 8N1 */
+#define PC_UART_BAUD   115200u    /* 默认 115200（与现有治具/串口助手统一）：协议表原写 460800，改这一行即可切回 */
 
 /*===== 采样参数 =====*/
 #define ADC_SAMPLES_DEFAULT   8u  /* 每通道默认平均次数 */
